@@ -7,9 +7,9 @@ vim.g.mapleader = " "
 require('plugins')
 
 -- LSP config
-require('lsp')
+require('plugins.lsp')
 -- nvim-cmp config
-require('cmp')
+require('plugins.cmp')
 -- telescope config
 require('plugins.telescope')
 
