@@ -1,5 +1,8 @@
 local Plug = vim.fn['plug#']
 
+-- TODO: add
+-- something for TODOs
+
 vim.call('plug#begin', '~/.config/nvim/plugged')
   -- treesitter stuff
   Plug ('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })

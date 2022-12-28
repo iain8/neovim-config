@@ -1,36 +1,23 @@
 local cmp = require('cmp')
 local luasnip = require("luasnip")
 
+-- code completion config
 cmp.setup({
   mapping = {
+    -- navigating dropdown
     ['<Up>'] = cmp.mapping.select_prev_item(),
     ['<Down>'] = cmp.mapping.select_next_item(),
+    -- not sure what? TODO
     ['<C-Space>'] = cmp.mapping.complete(),
-    -- space to cancel suggestion (hopefully)
+    -- right key to cancel suggestion
     ['<Right>'] = cmp.mapping.abort(),
+    -- enter to add selection (supposed to replace existing but doesn't? TODO)
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+      select = truew
     },
-    --      ['<Tab>'] = function(fallback)
-      --        if cmp.visible() then
-      --          cmp.select_next_item()
-      --        elseif luasnip.expand_or_jumpable() then
-      --          luasnip.expand_or_jump()
-      --        else
-      --          fallback()
-      --        end
-      --      end,
-    ['<S-Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end,
   },
+  -- snippets config
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
@@ -51,5 +38,6 @@ cmp.setup.cmdline(';', {
   })
 })
 
+-- TODO: what are we doing with this var?
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 

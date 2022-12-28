@@ -1,14 +1,17 @@
--- loading plugins
+-- base config that affects plugin settings etc
+
+-- set SPACE as leader key
+vim.g.mapleader = " "
+
+-- load plugins
 require('plugins')
+
 -- LSP config
 require('lsp')
 -- nvim-cmp config
 require('cmp')
 -- telescope config
-require('telescope')
-
--- set SPACE as leader key
-vim.g.mapleader = ' '
+require('plugins.telescope')
 
 -- Needed for colour scheme
 vim.opt.termguicolors = true
