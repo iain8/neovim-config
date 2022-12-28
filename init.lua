@@ -69,11 +69,6 @@ require('orgmode').setup({
 
 require('Comment').setup()
 
-require("typescript").setup({
-  server = {
-    capabilities = capabilities
-  }
-})
 vim.keymap.set('n', '<leader>gd', ':TypescriptGoToSourceDefinition<CR>', {})
 
 require("null-ls").setup()
