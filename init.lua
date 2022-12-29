@@ -124,12 +124,15 @@ end, { expr = true })
 
 require('lsp_lines').setup()
 
+-- TODO: where are my underlines, sigh
 vim.diagnostic.config({
+  underline = true,
   virtual_text = false,
 })
 
 require('bufferline').setup({})
 
+-- TODO: some icon is just a red square
 require('neo-tree').setup({
   filesystem = {
     filtered_items = {
@@ -161,6 +164,7 @@ require('catppuccin').setup({
     lsp_trouble = true,
     native_lsp = {
       enabled = true,
+      -- TODO: still doesn't work
       underline = {
         errors = { 'underline' },
         hints = { 'underline' },
@@ -189,11 +193,5 @@ augroup NEOTREE_AUGROUP
   autocmd!
   au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left") end, 10)
 augroup END
-
-" red squiggles TODO: do they work??
-" hi LspDiagnosticsUnderlineError guifg=NONE ctermfg=NONE cterm=underline gui=underline
-" hi LspDiagnosticsUnderlineWarning guifg=NONE ctermfg=NONE cterm=underline gui=underline
-" hi LspDiagnosticsUnderlineInformation guifg=NONE ctermfg=NONE cterm=underline gui=underline
-" hi LspDiagnosticsUnderlineHint guifg=NONE ctermfg=NONE cterm=underline gui=underline
 ]]
 
