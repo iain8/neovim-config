@@ -1,8 +1,5 @@
 local Plug = vim.fn['plug#']
 
--- TODO: add
--- something for TODOs
-
 vim.call('plug#begin', '~/.config/nvim/plugged')
   -- treesitter stuff
   Plug ('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
@@ -21,6 +18,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/cmp-path'
+  Plug 'David-Kunz/cmp-npm'
   Plug 'hrsh7th/nvim-cmp'
   
   -- commenting

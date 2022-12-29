@@ -3,6 +3,9 @@ local luasnip = require("luasnip")
 
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
+-- npm completion source
+require('cmp-npm').setup({})
+
 -- code completion config
 cmp.setup({
   mapping = {
@@ -10,7 +13,7 @@ cmp.setup({
     ['<Up>'] = cmp.mapping.select_prev_item(),
     ['<Down>'] = cmp.mapping.select_next_item(),
     -- not sure what? TODO: commented out to see...
-    -- ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-Space>'] = cmp.mapping.complete(),
     -- right key to cancel suggestion
     ['<Right>'] = cmp.mapping.abort(),
     -- enter to add selection (supposed to replace existing but doesn't? TODO)
@@ -28,7 +31,8 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'buffer' },
-    { name = 'luasnip' }
+    { name = 'luasnip' },
+    { name = 'npm', keyword_length = 3 },
   })
 })
 
@@ -49,4 +53,6 @@ require("typescript").setup({
     capabilities = capabilities
   }
 })
+
+vim.keymap.set('n', '<leader>gd', ':TypescriptGoToSourceDefinition<CR>', {})
 
