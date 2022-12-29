@@ -1,3 +1,6 @@
+-- look for config files in the right place (not sure why this doesn't happen by default
+vim.opt.runtimepath:append(',~/.config/nvim')
+
 -- base config that affects plugin settings etc
 require('base')
 
@@ -13,12 +16,6 @@ require('plugins.telescope')
 
 -- Needed for colour scheme
 vim.opt.termguicolors = true
-
--- code folding
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
--- disable folding everything at startup
-vim.opt.foldenable = false
 
 -- Load custom tree-sitter grammar for org filetype
 require('orgmode').setup_ts_grammar()
@@ -59,6 +56,22 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
+
+vim.o.foldcolumn = '0'
+-- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevel = 99 
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+-- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+
+require('ufo').setup({
+  provider_selector = function(bufnr, filetype, buftype)
+    return {'treesitter', 'indent'}
+  end
+})
 
 -- TODO: see if orgmode is actually useful
 require('orgmode').setup({
