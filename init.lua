@@ -60,6 +60,7 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+-- TODO: see if orgmode is actually useful
 require('orgmode').setup({
   org_agenda_files = {'~/Dropbox/org/*', '~/my-orgs/**/*'},
   org_default_notes_file = '~/Dropbox/org/refile.org',
@@ -69,36 +70,37 @@ require('Comment').setup()
 
 require("null-ls").setup()
 
+-- TODO: validate i work
 require("eslint").setup({
-bin = 'eslint',
-code_actions = {
-  enable = true,
-  apply_on_save = {
-    enable = false,
-  },
-  disable_rule_comment = {
+  bin = 'eslint',
+  code_actions = {
     enable = true,
-    location = "separate_line", -- or `same_line`
+    apply_on_save = {
+      enable = false,
+    },
+    disable_rule_comment = {
+      enable = true,
+      location = "separate_line", -- or `same_line`
+    },
   },
-},
-diagnostics = {
-  enable = true,
-  report_unused_disable_directives = true,
-  run_on = "type", -- or `save`
-},
+  diagnostics = {
+    enable = true,
+    report_unused_disable_directives = true,
+    run_on = "type", -- or `save`
+  },
 })
 
 local rt = require("rust-tools")
 
 rt.setup({
-server = {
-  on_attach = function(_, bufnr)
-  -- Hover actions
-  vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-  -- Code action groups
-  vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-  end,
-},
+  server = {
+    on_attach = function(_, bufnr)
+    -- Hover actions
+    vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+    -- Code action groups
+    vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
 })
 
 require('inc_rename').setup()
@@ -107,34 +109,67 @@ vim.keymap.set("n", "<leader>rn", function()
 return ":IncRename " .. vim.fn.expand("<cword>")
 end, { expr = true })
 
-require('feline').setup()
-
 require('lsp_lines').setup()
 
 vim.diagnostic.config({
-virtual_text = false,
+  virtual_text = false,
 })
 
 require('bufferline').setup({})
 
 require('neo-tree').setup({
-filesystem = {
-  filtered_items = {
-    visible = true
-  },
-  use_libuv_file_watcher = false
-}
+  filesystem = {
+    filtered_items = {
+      visible = true
+    },
+    use_libuv_file_watcher = false
+  }
 })
+
+-- TODO: why no work
 require('session_manager').setup({
-autoload_mode = require('session_manager.config').AutoloadMode.LastSession,
-autosave_last_session = true
+  autoload_mode = require('session_manager.config').AutoloadMode.LastSession,
+  autosave_last_session = true
 })
 
 require('git-conflict').setup()
 require('gitsigns').setup()
 
+require('trouble').setup({})
+
+vim.keymap.set('n', '<Leader>xx', '<cmd>TroubleToggle<cr>', { silent = true, noremap = true })
+
+-- set up color scheme for various plugins
+require('catppuccin').setup({
+  integrations = {
+    cmp = true,
+    fidget = true,
+    gitsigns = true,
+    lsp_trouble = true,
+    native_lsp = {
+      enabled = true,
+      underline = {
+        errors = { 'underline' },
+        hints = { 'underline' },
+        warnings = { 'underline' },
+        information = { 'underline' },
+      },
+    },
+    neotree = true,
+    telescope = true,
+    treesitter = true,
+  }
+})
+
+-- set up status bar with color scheme
+local ctp_feline = require('catppuccin.groups.integrations.feline')
+
+require("feline").setup({
+  components = ctp_feline.get(),
+})
+
 -- enable colour scheme
-vim.cmd.colorscheme('catppuccin')
+vim.cmd.colorscheme('catppuccin-mocha')
 
 vim.cmd[[
 augroup NEOTREE_AUGROUP
@@ -142,7 +177,7 @@ augroup NEOTREE_AUGROUP
   au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left") end, 10)
 augroup END
 
-" red squiggles
+" red squiggles TODO: do they work??
 " hi LspDiagnosticsUnderlineError guifg=NONE ctermfg=NONE cterm=underline gui=underline
 " hi LspDiagnosticsUnderlineWarning guifg=NONE ctermfg=NONE cterm=underline gui=underline
 " hi LspDiagnosticsUnderlineInformation guifg=NONE ctermfg=NONE cterm=underline gui=underline

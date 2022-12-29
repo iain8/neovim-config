@@ -1,9 +1,9 @@
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-      -- Enable underline, use default values
-      underline = true,
-    }
-)
+--vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--  vim.lsp.diagnostic.on_publish_diagnostics, {
+--      -- Enable underline, use default values
+--      underline = true,
+--    }
+--)
 
 -- time for LSP keybinds
 local opts = { noremap=true, silent=true }
@@ -54,4 +54,10 @@ require('lspconfig')['rust_analyzer'].setup{
     ["rust-analyzer"] = {}
   }
 }
+
+require('fidget').setup({
+  window = {
+    blend = 0,
+  },
+})
 

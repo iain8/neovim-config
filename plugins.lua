@@ -35,6 +35,9 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'nvim-orgmode/orgmode'
   Plug 'MunifTanjim/eslint.nvim'
 
+  -- LSP status display
+  Plug 'j-hui/fidget.nvim'
+
   -- diagnostics
   Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
   
@@ -65,6 +68,9 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   
   -- theme
   Plug ('catppuccin/nvim', { ['as'] = 'catppuccin' })
+
+  -- warnings window
+  Plug 'folke/trouble.nvim'
 
 vim.call('plug#end')
 
