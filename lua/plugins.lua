@@ -72,6 +72,9 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   -- warnings window
   Plug 'folke/trouble.nvim'
 
+  -- TODOs!
+  Plug 'folke/todo-comments.nvim'
+
   -- making folds better
   Plug 'kevinhwang91/promise-async' 
   Plug 'kevinhwang91/nvim-ufo'

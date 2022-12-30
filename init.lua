@@ -13,6 +13,8 @@ require('plugins.lsp')
 require('plugins.cmp')
 -- telescope config
 require('plugins.telescope')
+-- projections config
+require('plugins.projections')
 
 -- Needed for colour scheme
 vim.opt.termguicolors = true
@@ -21,14 +23,14 @@ vim.opt.termguicolors = true
 require('orgmode').setup_ts_grammar()
 
 -- Tree-sitter configuration
-require'nvim-treesitter.configs'.setup {
-  -- syntax highlighting
+require('nvim-treesitter.configs').setup({
+  -- syntax colouring
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = {'org'},
+    -- additional_vim_regex_highlighting = {'org'},
   },
   refactor = {
-    -- highlight def and usage of thing under cursor
+    -- TODO: not working highlight def and usage of thing under cursor
     highlight_definitions = {
       enable = true,
     },
@@ -55,7 +57,7 @@ require'nvim-treesitter.configs'.setup {
       },
     },
   },
-}
+})
 
 vim.o.foldcolumn = '0'
 -- Using ufo provider need a large value, feel free to decrease the value
@@ -154,34 +156,6 @@ require('projections').setup({
   },
 })
 
--- Bind <leader>fp to Telescope projections
-require('telescope').load_extension('projections')
-vim.keymap.set("n", "<leader>fp", function() vim.cmd("Telescope projections") end)
-
--- save localoptions to session file
-vim.opt.sessionoptions:append("localoptions")
--- save globals so buffers persist
-vim.opt.sessionoptions:append("globals")
-
--- Autostore session on VimExit
-local Session = require("projections.session")
-vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
-  callback = function() Session.store(vim.loop.cwd()) end,
-})
-
--- session restore -- no bueno so far
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-  callback = function()
-    if vim.fn.argc() ~= 0 then return end
-    local session_info = Session.info(vim.loop.cwd())
-    if session_info == nil then
-      Session.restore_latest()
-    else
-      Session.restore(vim.loop.cwd())
-    end
-  end,
-  desc = "Restore last session automatically"
-})
 
 require('git-conflict').setup()
 require('gitsigns').setup()
@@ -189,6 +163,10 @@ require('gitsigns').setup()
 require('trouble').setup({})
 
 vim.keymap.set('n', '<Leader>xx', '<cmd>TroubleToggle<cr>', { silent = true, noremap = true })
+
+require("todo-comments").setup({})
+
+vim.keymap.set('n', '<Leader>ft', '<cmd>TodoTelescope<cr>', { silent = true, noremap = true })
 
 -- set up color scheme for various plugins
 require('catppuccin').setup({
