@@ -142,10 +142,45 @@ require('neo-tree').setup({
   }
 })
 
--- TODO: why no work
-require('session_manager').setup({
-  autoload_mode = require('session_manager.config').AutoloadMode.LastSession,
-  autosave_last_session = true
+require('projections').setup({
+  store_hooks = {
+    pre = function ()
+      -- close neo-tree before saving session
+      if pcall(require, "neo-tree") then vim.cmd [[Neotree action=close]] end
+    end
+  },
+  workspaces = {
+    '~/dev',
+  },
+})
+
+-- Bind <leader>fp to Telescope projections
+require('telescope').load_extension('projections')
+vim.keymap.set("n", "<leader>fp", function() vim.cmd("Telescope projections") end)
+
+-- save localoptions to session file
+vim.opt.sessionoptions:append("localoptions")
+-- save globals so buffers persist
+vim.opt.sessionoptions:append("globals")
+
+-- Autostore session on VimExit
+local Session = require("projections.session")
+vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
+  callback = function() Session.store(vim.loop.cwd()) end,
+})
+
+-- session restore -- no bueno so far
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  callback = function()
+    if vim.fn.argc() ~= 0 then return end
+    local session_info = Session.info(vim.loop.cwd())
+    if session_info == nil then
+      Session.restore_latest()
+    else
+      Session.restore(vim.loop.cwd())
+    end
+  end,
+  desc = "Restore last session automatically"
 })
 
 require('git-conflict').setup()
@@ -188,6 +223,7 @@ require("feline").setup({
 -- enable colour scheme
 vim.cmd.colorscheme('catppuccin-mocha')
 
+-- show neotree on startup
 vim.cmd[[
 augroup NEOTREE_AUGROUP
   autocmd!

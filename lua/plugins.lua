@@ -59,8 +59,8 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   -- tabs
   Plug ('akinsho/bufferline.nvim', { tag = 'v2.*' })
   
-  -- session restore
-  Plug 'https://github.com/Shatur/neovim-session-manager'
+  -- workspace and session manager
+  Plug 'gnikdroy/projections.nvim'
   
   -- git stuff
   Plug ('akinsho/git-conflict.nvim', { tag = '*' })
