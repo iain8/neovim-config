@@ -40,6 +40,12 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
   -- diagnostics
   Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+
+  -- debugging
+  Plug 'mfussenegger/nvim-dap'
+  Plug 'rcarriga/nvim-dap-ui'
+  -- NOTE: vscode-js-debug installed separately in ~/dev/vscode-js-debug
+  Plug 'mxsdev/nvim-dap-vscode-js'
   
   -- rename
   Plug 'smjonas/inc-rename.nvim'
