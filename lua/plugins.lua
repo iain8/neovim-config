@@ -43,6 +43,9 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   
   -- rename
   Plug 'smjonas/inc-rename.nvim'
+
+  -- autopair brackets
+  Plug 'windwp/nvim-autopairs'
   
   -- status bar
   Plug 'feline-nvim/feline.nvim'

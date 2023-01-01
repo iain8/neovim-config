@@ -6,6 +6,8 @@ vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 -- npm completion source
 require('cmp-npm').setup({})
 
+require('nvim-autopairs').setup({})
+
 -- code completion config
 cmp.setup({
   mapping = {
@@ -44,6 +46,11 @@ cmp.setup.cmdline(';', {
   })
 })
 
+
+cmp.event:on(
+  'confirm_done',
+  require('nvim-autopairs.completion.cmp').on_confirm_done()
+)
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
