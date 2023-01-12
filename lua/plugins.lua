@@ -23,6 +23,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   
   -- commenting
   Plug 'numToStr/Comment.nvim'
+  Plug 'JoosepAlviste/nvim-ts-context-commentstring'
   
   -- snippets
   Plug 'saadparwaiz1/cmp_luasnip'
@@ -33,7 +34,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'jose-elias-alvarez/typescript.nvim'
   Plug 'simrat39/rust-tools.nvim'
   Plug 'nvim-orgmode/orgmode'
-  Plug 'MunifTanjim/eslint.nvim'
 
   -- LSP status display
   Plug 'j-hui/fidget.nvim'

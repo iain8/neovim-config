@@ -13,6 +13,9 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 
+-- show max line length indicator
+vim.opt.colorcolumn = '100'
+
 -- soft word wrapping
 vim.opt.wrap = true
 vim.opt.linebreak = true

@@ -15,6 +15,8 @@ require('plugins.cmp')
 require('plugins.telescope')
 -- projections config
 require('plugins.projections')
+-- debug config
+require('plugins.dap')
 
 -- Needed for colour scheme
 vim.opt.termguicolors = true
@@ -24,6 +26,10 @@ require('orgmode').setup_ts_grammar()
 
 -- Tree-sitter configuration
 require('nvim-treesitter.configs').setup({
+  -- commenting
+  context_commenting = {
+    enable = true,
+  },
   -- syntax colouring
   highlight = {
     enable = true,
@@ -31,6 +37,7 @@ require('nvim-treesitter.configs').setup({
   },
   refactor = {
     -- TODO: not working highlight def and usage of thing under cursor
+    -- but it goes crazy if i press "*"
     highlight_definitions = {
       enable = true,
     },
@@ -81,29 +88,15 @@ require('orgmode').setup({
   org_default_notes_file = '~/Dropbox/org/refile.org',
 })
 
-require('Comment').setup()
+require('Comment').setup({
+  hook = function()
+    -- if vim.api.nvim_buf_get_option(0, "filetype") == "vue" then
+      require("ts_context_commentstring.internal").update_commentstring()
+    -- end
+  end
+})
 
 require("null-ls").setup()
-
--- TODO: validate i work
-require("eslint").setup({
-  bin = 'eslint',
-  code_actions = {
-    enable = true,
-    apply_on_save = {
-      enable = false,
-    },
-    disable_rule_comment = {
-      enable = true,
-      location = "separate_line", -- or `same_line`
-    },
-  },
-  diagnostics = {
-    enable = true,
-    report_unused_disable_directives = true,
-    run_on = "type", -- or `save`
-  },
-})
 
 local rt = require("rust-tools")
 
@@ -132,6 +125,9 @@ vim.diagnostic.config({
   virtual_text = false,
 })
 
+-- trying out this eslint setup
+require('lspconfig').eslint.setup({})
+
 -- debug config
 require("dapui").setup()
 require("dap-vscode-js").setup({
@@ -139,6 +135,7 @@ require("dap-vscode-js").setup({
   debugger_path = '~/dev/vscode-js-debug',
 })
 
+-- create debug jobs for TS and JS
 for _, language in ipairs({ "typescript", "javascript" }) do
   require("dap").configurations[language] = {
     {
