@@ -21,9 +21,6 @@ require('plugins.dap')
 -- Needed for colour scheme
 vim.opt.termguicolors = true
 
--- Load custom tree-sitter grammar for org filetype
-require('orgmode').setup_ts_grammar()
-
 -- Tree-sitter configuration
 require('nvim-treesitter.configs').setup({
   -- commenting
@@ -80,12 +77,6 @@ require('ufo').setup({
   provider_selector = function(bufnr, filetype, buftype)
     return {'treesitter', 'indent'}
   end
-})
-
--- TODO: see if orgmode is actually useful
-require('orgmode').setup({
-  org_agenda_files = {'~/Dropbox/org/*', '~/my-orgs/**/*'},
-  org_default_notes_file = '~/Dropbox/org/refile.org',
 })
 
 require('Comment').setup({
