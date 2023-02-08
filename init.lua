@@ -108,6 +108,10 @@ vim.keymap.set("n", "<leader>rn", function()
 return ":IncRename " .. vim.fn.expand("<cword>")
 end, { expr = true })
 
+vim.keymap.set("n", "<leader>tsrn", function()
+return ";TypescriptRenameFile " .. vim.fn.expand("<cword>")
+end, { expr = true })
+
 require('lsp_lines').setup()
 
 -- TODO: where are my underlines, sigh

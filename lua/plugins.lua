@@ -73,6 +73,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   -- git stuff
   Plug ('akinsho/git-conflict.nvim', { tag = '*' })
   Plug 'lewis6991/gitsigns.nvim'
+  Plug 'airblade/vim-gitgutter'
   
   -- theme
   Plug ('catppuccin/nvim', { ['as'] = 'catppuccin' })
