@@ -242,3 +242,14 @@ augroup NEOTREE_AUGROUP
 augroup END
 ]]
 
+-- adding some commands here to try and make them work
+
+-- show max line length indicator
+vim.o.colorcolumn = '100'
+
+-- soft word wrapping
+vim.o.wrap = true
+vim.o.linebreak = true
+vim.o.breakindent = true
+vim.o.list = false
+
