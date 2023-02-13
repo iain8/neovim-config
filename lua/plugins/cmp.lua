@@ -8,8 +8,15 @@ require('cmp-npm').setup({})
 
 require('nvim-autopairs').setup({})
 
+local lspkind = require('lspkind')
+
 -- code completion config
 cmp.setup({
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = 'symbol_text'
+    }),
+  },
   mapping = {
     -- navigating dropdown
     ['<Up>'] = cmp.mapping.select_prev_item(),
@@ -21,7 +28,7 @@ cmp.setup({
     -- enter to add selection (supposed to replace existing but doesn't? TODO)
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = truew
+      select = true
     },
   },
   -- snippets config

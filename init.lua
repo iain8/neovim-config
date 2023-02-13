@@ -13,8 +13,6 @@ require('plugins.lsp')
 require('plugins.cmp')
 -- telescope config
 require('plugins.telescope')
--- projections config
-require('plugins.projections')
 -- debug config
 require('plugins.dap')
 
@@ -177,18 +175,19 @@ require('neo-tree').setup({
   }
 })
 
-require('projections').setup({
-  store_hooks = {
-    pre = function ()
-      -- close neo-tree before saving session
-      if pcall(require, "neo-tree") then vim.cmd [[Neotree action=close]] end
+require('auto-session').setup({
+  auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+  post_restore_cmds = {
+    function()
+      require 'neo-tree.sources.manager'.show('filesystem')
     end
   },
-  workspaces = {
-    '~/dev',
+  pre_save_cmds = {
+    function()
+		  require("neo-tree.sources.manager").close_all()
+    end
   },
 })
-
 
 require('git-conflict').setup()
 require('gitsigns').setup()
@@ -235,12 +234,12 @@ require("feline").setup({
 vim.cmd.colorscheme('catppuccin-mocha')
 
 -- show neotree on startup
-vim.cmd[[
-augroup NEOTREE_AUGROUP
-  autocmd!
-  au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left") end, 10)
-augroup END
-]]
+-- vim.cmd[[
+-- augroup NEOTREE_AUGROUP
+--   autocmd!
+--   au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left") end, 10)
+-- augroup END
+-- ]]
 
 -- adding some commands here to try and make them work
 
@@ -253,3 +252,8 @@ vim.o.linebreak = true
 vim.o.breakindent = true
 vim.o.list = false
 
+-- use system clipboard (i think)
+vim.opt.clipboard="unnamedplus"
+
+-- if we get sick of those error messages
+-- vim.opt.swapfile = false

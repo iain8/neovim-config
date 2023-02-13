@@ -15,11 +15,17 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   -- code completion
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/cmp-nvim-lsp'
+  -- various completion sources
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/cmp-path'
   Plug 'David-Kunz/cmp-npm'
+  -- the plugin itself
   Plug 'hrsh7th/nvim-cmp'
+  -- some nice symbols in the suggestions list
+  Plug 'onsails/lspkind-nvim'
+  -- highlight fn args on complete
+  Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
   
   -- commenting
   Plug 'numToStr/Comment.nvim'
@@ -67,9 +73,9 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   -- tabs
   Plug ('akinsho/bufferline.nvim', { tag = 'v2.*' })
   
-  -- workspace and session manager
-  Plug 'gnikdroy/projections.nvim'
-  
+  -- session manager
+  Plug 'rmagatti/auto-session'
+
   -- git stuff
   Plug ('akinsho/git-conflict.nvim', { tag = '*' })
   Plug 'lewis6991/gitsigns.nvim'
