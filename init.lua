@@ -27,8 +27,8 @@ require('nvim-treesitter.configs').setup({
   },
   -- syntax colouring
   highlight = {
+    additional_vim_regex_highlighting = false,
     enable = true,
-    -- additional_vim_regex_highlighting = {'org'},
   },
   refactor = {
     -- TODO: not working highlight def and usage of thing under cursor
@@ -163,7 +163,13 @@ for _, language in ipairs({ "typescript", "javascript" }) do
   }
 end
 
-require('bufferline').setup({})
+require('bufferline').setup({
+  options = {
+    color_icons = true,
+    -- show full filename in tab
+    truncate_names = false,
+  },
+})
 
 -- TODO: some icon is just a red square
 require('neo-tree').setup({
@@ -175,6 +181,7 @@ require('neo-tree').setup({
   }
 })
 
+-- why it stop :((
 require('auto-session').setup({
   auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
   post_restore_cmds = {

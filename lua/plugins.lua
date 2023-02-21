@@ -62,7 +62,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'feline-nvim/feline.nvim'
   
   -- icons
-  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'nvim-tree/nvim-web-devicons'
   
   -- ???
   Plug 'MunifTanjim/nui.nvim'
