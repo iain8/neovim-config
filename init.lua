@@ -53,10 +53,11 @@ require('nvim-treesitter.configs').setup({
     lsp_interop = {
       enable = true,
       border = 'none',
-      peek_definition_code = {
-        ["<leader>df"] = "@function.outer",
-        ["<leader>dF"] = "@class.outer",
-      },
+      -- TODO:  this might be causing errors
+      -- peek_definition_code = {
+      --   ["<leader>df"] = "@function.outer",
+      --   ["<leader>dF"] = "@class.outer",
+      -- },
     },
   },
 })
@@ -91,11 +92,12 @@ local rt = require("rust-tools")
 
 rt.setup({
   server = {
+    -- TODO: this probably overrides everything in lsp.lua...
     on_attach = function(_, bufnr)
-    -- Hover actions
-    vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-    -- Code action groups
-    vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
     end,
   },
 })
@@ -239,14 +241,6 @@ require("feline").setup({
 
 -- enable colour scheme
 vim.cmd.colorscheme('catppuccin-mocha')
-
--- show neotree on startup
--- vim.cmd[[
--- augroup NEOTREE_AUGROUP
---   autocmd!
---   au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left") end, 10)
--- augroup END
--- ]]
 
 -- adding some commands here to try and make them work
 

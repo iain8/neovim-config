@@ -59,14 +59,3 @@ cmp.event:on(
   require('nvim-autopairs.completion.cmp').on_confirm_done()
 )
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
--- configure completion for typescript
-require("typescript").setup({
-  server = {
-    capabilities = capabilities
-  }
-})
-
-vim.keymap.set('n', '<leader>gd', ':TypescriptGoToSourceDefinition<CR>', {})
-

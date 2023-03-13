@@ -59,7 +59,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'windwp/nvim-autopairs'
   
   -- status bar
-  Plug 'feline-nvim/feline.nvim'
+  Plug 'freddiehaddad/feline.nvim'
   
   -- icons
   Plug 'nvim-tree/nvim-web-devicons'
