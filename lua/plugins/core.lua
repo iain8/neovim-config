@@ -5,6 +5,12 @@
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
+  -- disable dashboard
+  {
+    "goolord/alphanvim",
+    enabled = false,
+  },
+
   -- set those colours
   { "sainnhe/everforest" },
 
@@ -60,6 +66,20 @@ return {
     },
   },
 
+  -- remove path completion as it is annoying
+  {
+    "hrsh7th/nvim-cmp",
+    ---@param opts cmp.ConfigSchema
+    opts = function(_, opts)
+      local cmp = require("cmp")
+      opts.sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
+      })
+    end,
+  },
+
   -- change trouble config
   -- {
   --   "folke/trouble.nvim",
@@ -78,16 +98,6 @@ return {
   --   config = true,
   -- },
   --
-  -- -- override nvim-cmp and add cmp-emoji
-  -- {
-  --   "hrsh7th/nvim-cmp",
-  --   dependencies = { "hrsh7th/cmp-emoji" },
-  --   ---@param opts cmp.ConfigSchema
-  --   opts = function(_, opts)
-  --     local cmp = require("cmp")
-  --     opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" } }))
-  --   end,
-  -- },
   --
   -- -- change some telescope options and a keymap to browse plugin files
   -- {
