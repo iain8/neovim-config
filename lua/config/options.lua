@@ -4,7 +4,3 @@
 
 -- absolute line numbers!
 vim.opt.relativenumber = false
-
--- a couple of theme options
-vim.g.everforest_background = "soft"
-vim.g.everforest_better_performance = true
